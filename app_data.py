@@ -7,10 +7,10 @@ no hace falta tocar el HTML.
 
 PROFILE = {
     "name": "Alberto Piedra Venegas",
-    "role": "Desarrollador Big Data & Inteligencia Artificial",
+    "role": "Desarrollador Big Data, IA & Desarrollo Web",
     "tagline": (
-        "Construyo pipelines de datos, modelos de IA/ML y agentes inteligentes "
-        "de extremo a extremo: desde la ingesta de datos hasta el despliegue en producción."
+        "Construyo pipelines de datos, modelos de IA/ML, agentes inteligentes y aplicaciones "
+        "web de extremo a extremo: desde la ingesta de datos hasta el despliegue en producción."
     ),
     "email": "albertopiedra155@gmail.com",
     "github": "https://github.com/YellowAlberto",
@@ -75,9 +75,14 @@ STACK = [
         "icon": "🔌",
         "skills": ["FastAPI", "Flask", "JWT", "SQLAlchemy", "Gradio", "OpenAPI / Swagger"],
     },
+    {
+        "category": "Desarrollo Web",
+        "icon": "🌐",
+        "skills": ["HTML5", "CSS3", "JavaScript", "Jinja2", "Diseño responsive", "Vercel"],
+    },
 ]
 
-# Proyectos destacados: los que están desplegados y accesibles en vivo
+# Proyectos personales: iniciativas propias, desplegadas y accesibles en vivo
 FEATURED_PROJECTS = [
     {
         "title": "Inazuma Fantasy",
@@ -167,7 +172,6 @@ OTHER_PROJECTS = [
         "stack": ["LangChain", "ChromaDB", "RAG", "Embeddings"],
         "url": None,
         "cta": None,
-        "docs": [{"label": "Preguntas y respuestas del RAG (PDF)", "url": "/static/docs/rag-langchain.pdf"}],
     },
     {
         "title": "Clasificadores de visión artificial",
