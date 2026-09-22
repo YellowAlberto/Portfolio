@@ -122,6 +122,16 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           {% endif %}
+          {% if p.docs %}
+          <div class="doc-links">
+            {% for d in p.docs %}
+            <a class="doc-link" href="{{ d.url }}" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              {{ d.label }}
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
         </article>
         {% endfor %}
       </div>

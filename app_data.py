@@ -154,6 +154,7 @@ OTHER_PROJECTS = [
         "stack": ["AWS S3", "Glue", "Athena"],
         "url": None,
         "cta": None,
+        "docs": [{"label": "Memoria del proyecto (PDF)", "url": "/static/docs/etl-aws.pdf"}],
     },
     {
         "title": "Asistente RAG con LangChain",
@@ -166,6 +167,7 @@ OTHER_PROJECTS = [
         "stack": ["LangChain", "ChromaDB", "RAG", "Embeddings"],
         "url": None,
         "cta": None,
+        "docs": [{"label": "Preguntas y respuestas del RAG (PDF)", "url": "/static/docs/rag-langchain.pdf"}],
     },
     {
         "title": "Clasificadores de visión artificial",
@@ -178,6 +180,10 @@ OTHER_PROJECTS = [
         "stack": ["TensorFlow/Keras", "YOLO", "CNN", "Transfer learning"],
         "url": None,
         "cta": None,
+        "docs": [
+            {"label": "Informe: clasificador de melanoma (PDF)", "url": "/static/docs/clasificador-melanoma.pdf"},
+            {"label": "Informe: clasificador de residuos (PDF)", "url": "/static/docs/clasificador-basura.pdf"},
+        ],
     },
     {
         "title": "Data Warehouse & Business Intelligence",
@@ -190,6 +196,7 @@ OTHER_PROJECTS = [
         "stack": ["Pentaho", "SSIS", "Power BI", "PyCaret"],
         "url": None,
         "cta": None,
+        "docs": [{"label": "Proyecto Chicago Crimes (PDF)", "url": "/static/docs/dw-bi-chicago-crimes.pdf"}],
     },
     {
         "title": "Dashboard de monitorización con Prometheus",
@@ -201,5 +208,6 @@ OTHER_PROJECTS = [
         "stack": ["Prometheus", "Monitorización"],
         "url": None,
         "cta": None,
+        "docs": [{"label": "Memoria del dashboard (PDF)", "url": "/static/docs/dashboard-prometheus.pdf"}],
     },
 ]

@@ -454,6 +454,25 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
 }
 .card-link:hover { gap: 9px; color: var(--accent-strong); }
 
+.doc-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.15s ease, gap 0.15s ease;
+}
+.doc-link svg { flex-shrink: 0; color: var(--accent-violet); }
+.doc-link:hover { color: var(--text); gap: 10px; }
+
 /* -------------------- Contact -------------------- */
 .section--contact { text-align: center; }
 .contact-card {
