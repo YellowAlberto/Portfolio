@@ -18,49 +18,61 @@ PROFILE = {
 }
 
 # Categorías de tecnologías para la sección "Stack"
+# "icon" es un emoji: ligero, sin dependencias externas, y encaja con el resto del diseño.
 STACK = [
     {
         "category": "Lenguajes",
+        "icon": "💻",
         "skills": ["Python", "R", "SQL"],
     },
     {
         "category": "Big Data",
+        "icon": "🗄️",
         "skills": ["Hadoop (HDFS/MapReduce)", "Apache Pig", "Sqoop", "Flume", "Kafka", "Apache NiFi", "Dremio"],
     },
     {
         "category": "Bases de datos",
+        "icon": "🧬",
         "skills": ["MongoDB", "Cassandra", "Redis", "Neo4j", "SQL Server / SSIS", "MySQL", "PostgreSQL", "SQLite"],
     },
     {
         "category": "Cloud (AWS)",
+        "icon": "☁️",
         "skills": ["S3", "Glue", "Athena", "IAM", "CloudFormation"],
     },
     {
         "category": "ETL / BI",
+        "icon": "📊",
         "skills": ["Pentaho (Kettle/PDI)", "Power BI", "Tableau", "Excel avanzado"],
     },
     {
         "category": "DevOps",
+        "icon": "⚙️",
         "skills": ["Docker", "Docker Compose", "Dev Containers", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
     },
     {
         "category": "Machine Learning",
+        "icon": "🧠",
         "skills": ["scikit-learn", "PyCaret", "K-means / DBSCAN", "Árboles de decisión", "SVM", "Regresión", "Ensembles"],
     },
     {
         "category": "Deep Learning / Visión artificial",
+        "icon": "👁️",
         "skills": ["TensorFlow", "Keras", "CNNs", "YOLOv8", "OpenCV", "GANs", "Transfer learning"],
     },
     {
         "category": "NLP",
+        "icon": "💬",
         "skills": ["Tokenización", "TF-IDF", "Embeddings", "Whoosh", "Análisis de sentimiento"],
     },
     {
         "category": "IA generativa / Agentes",
+        "icon": "🤖",
         "skills": ["OpenAI API", "Groq", "LangChain", "RAG (ChromaDB)", "CrewAI", "Ollama", "MCP / FastMCP"],
     },
     {
         "category": "Backend / APIs",
+        "icon": "🔌",
         "skills": ["FastAPI", "Flask", "JWT", "SQLAlchemy", "Gradio", "OpenAPI / Swagger"],
     },
 ]
@@ -69,6 +81,7 @@ STACK = [
 FEATURED_PROJECTS = [
     {
         "title": "Inazuma Fantasy",
+        "icon": "⚽",
         "description": (
             "Aplicación web de fantasy football basada en personajes de Inazuma Eleven. "
             "Sistema de ligas y subastas diarias, motor propio de simulación de partidos "
@@ -80,6 +93,7 @@ FEATURED_PROJECTS = [
     },
     {
         "title": "WhatStats",
+        "icon": "📈",
         "description": (
             "Analizador de estadísticas de conversaciones de WhatsApp: procesa el export del chat "
             "y genera métricas de actividad (mensajes por persona, horas de mayor actividad, "
@@ -95,6 +109,7 @@ FEATURED_PROJECTS = [
 OTHER_PROJECTS = [
     {
         "title": "ReciclA — Asistente Inteligente de Reciclaje",
+        "icon": "♻️",
         "description": (
             "Ecosistema de IA para fomentar el reciclaje: detección de residuos con YOLOv8, "
             "agente conversacional con Groq, backend FastAPI con autenticación JWT, "
@@ -107,6 +122,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Agente de seguimiento de matrículas y contenedores",
+        "icon": "🚚",
         "description": (
             "Agente de IA para automatizar el seguimiento de stock y pedidos a partir de "
             "OCR sobre matrículas/contenedores, orquestado con CrewAI y modelos locales "
@@ -118,6 +134,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Pipeline de streaming en tiempo real",
+        "icon": "🔄",
         "description": (
             "Arquitectura de ingesta y consulta de datos en streaming: Kafka como cola de mensajes, "
             "NiFi para el flujo de datos, MongoDB como almacenamiento y Dremio como capa de consulta, "
@@ -129,6 +146,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "ETL en AWS con modelo en estrella",
+        "icon": "🪣",
         "description": (
             "Proceso ETL completo en AWS: ingesta en S3, transformación y catalogación con Glue "
             "Crawlers, y consultas analíticas con Athena sobre un modelo dimensional en estrella."
@@ -139,6 +157,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Asistente RAG con LangChain",
+        "icon": "📚",
         "description": (
             "Sistema de Recuperación Aumentada por Generación (RAG) sobre documentación real "
             "de recursos de apoyo: chunking, embeddings y búsqueda semántica con ChromaDB "
@@ -150,6 +169,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Clasificadores de visión artificial",
+        "icon": "🔬",
         "description": (
             "Modelos de clasificación de imágenes con CNNs y transfer learning: detección de "
             "melanoma y clasificación de residuos para reciclaje combinando YOLO y redes "
@@ -161,6 +181,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Data Warehouse & Business Intelligence",
+        "icon": "🏢",
         "description": (
             "Modelado y explotación de un Data Warehouse con Pentaho/SSIS, análisis predictivo "
             "y de clustering de clientes con PyCaret, y visualización de datos de criminalidad "
@@ -172,6 +193,7 @@ OTHER_PROJECTS = [
     },
     {
         "title": "Dashboard de monitorización con Prometheus",
+        "icon": "📡",
         "description": (
             "Sistema de monitorización de infraestructura con Prometheus, con configuración de "
             "scraping y visualización de métricas en tiempo real."
