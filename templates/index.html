@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ profile.name }} · Portfolio</title>
+  <meta name="description" content="{{ profile.tagline }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand">{{ profile.name.split(" ")[0] }}<span class="dot">.</span></a>
+      <nav class="nav__links">
+        <a href="#stack">Stack</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="hero__eyebrow">// {{ profile.role }}</p>
+      <h1 class="hero__title">{{ profile.name }}</h1>
+      <p class="hero__tagline">{{ profile.tagline }}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#proyectos">Ver proyectos</a>
+        <a class="btn btn--ghost" href="mailto:{{ profile.email }}">Contactar</a>
+      </div>
+    </section>
+
+    <section id="stack" class="section">
+      <h2 class="section__title"><span class="idx">01</span> Stack de tecnologías</h2>
+      <div class="stack-grid">
+        {% for group in stack %}
+        <div class="stack-card">
+          <h3>{{ group.category }}</h3>
+          <ul class="tag-list">
+            {% for item in group.skills %}
+            <li class="tag">{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="proyectos" class="section">
+      <h2 class="section__title"><span class="idx">02</span> Proyectos destacados</h2>
+      <div class="featured-grid">
+        {% for p in featured_projects %}
+        <article class="featured-card">
+          <div class="featured-card__body">
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <ul class="tag-list">
+              {% for t in p.stack %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+            </ul>
+          </div>
+          {% if p.url %}
+          <a class="btn btn--primary btn--block" href="{{ p.url }}" target="_blank" rel="noopener noreferrer">{{ p.cta or "Ver proyecto" }} ↗</a>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+
+      <h3 class="subsection__title">Proyectos de formación · Big Data &amp; IA</h3>
+      <div class="project-grid">
+        {% for p in other_projects %}
+        <article class="project-card">
+          <h4>{{ p.title }}</h4>
+          <p>{{ p.description }}</p>
+          <ul class="tag-list">
+            {% for t in p.stack %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+          </ul>
+          {% if p.url %}
+          <a class="card-link" href="{{ p.url }}" target="_blank" rel="noopener noreferrer">{{ p.cta or "Ver más" }} ↗</a>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="contacto" class="section section--contact">
+      <h2 class="section__title"><span class="idx">03</span> Contacto</h2>
+      <p class="contact__text">¿Tienes un proyecto o una oportunidad en mente? Hablemos.</p>
+      <div class="contact__links">
+        <a class="btn btn--primary" href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+        {% if profile.github %}
+        <a class="btn btn--ghost" href="{{ profile.github }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> {{ profile.name }}. Hecho con Python &amp; Flask.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
