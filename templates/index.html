@@ -21,7 +21,7 @@
 
   <header class="nav">
     <div class="nav__inner">
-      <a href="#top" class="nav__brand">{{ profile.name.split(" ")[0] }}<span class="dot">.</span></a>
+      <a href="#top" class="nav__brand">{{ profile.name.split(" ")[1] }}<span class="dot">.</span></a>
       <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -49,9 +49,6 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn--ghost" href="mailto:{{ profile.email }}">Contactar</a>
-      </div>
-      <div class="hero__scroll reveal" aria-hidden="true">
-        <span></span>
       </div>
     </section>
 
@@ -162,6 +159,10 @@
     <p>&copy; <span id="year"></span> {{ profile.name }} · Hecho con Python &amp; Flask</p>
   </footer>
 
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -219,6 +220,17 @@
       );
       sections.forEach((s) => navIo.observe(s));
     }
+
+    // Botón "volver arriba"
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener(
+      "scroll",
+      () => backToTop.classList.toggle("is-visible", window.scrollY > 480),
+      { passive: true }
+    );
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>
