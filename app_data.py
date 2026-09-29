@@ -38,7 +38,7 @@ STACK = [
     {
         "category": "Cloud (AWS)",
         "icon": "☁️",
-        "skills": ["S3", "Glue", "Athena", "IAM", "CloudFormation"],
+        "skills": ["S3", "Glue", "Athena", "IAM"],
     },
     {
         "category": "ETL / BI",
@@ -53,12 +53,12 @@ STACK = [
     {
         "category": "Machine Learning",
         "icon": "🧠",
-        "skills": ["scikit-learn", "PyCaret", "K-means / DBSCAN", "Árboles de decisión", "SVM", "Regresión", "Ensembles"],
+        "skills": ["scikit-learn", "PyCaret"],
     },
     {
         "category": "Deep Learning / Visión artificial",
         "icon": "👁️",
-        "skills": ["TensorFlow", "Keras", "CNNs", "YOLOv8", "OpenCV", "GANs", "Transfer learning"],
+        "skills": ["TensorFlow", "Keras", "YOLOv8", "OpenCV"],
     },
     {
         "category": "NLP",
@@ -78,7 +78,7 @@ STACK = [
     {
         "category": "Desarrollo Web",
         "icon": "🌐",
-        "skills": ["HTML5", "CSS3", "JavaScript", "Jinja2", "Diseño responsive", "Vercel"],
+        "skills": ["HTML5", "CSS3", "JavaScript", "Jinja2", "Diseño responsive"],
     },
 ]
 
