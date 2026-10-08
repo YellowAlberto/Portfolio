@@ -97,15 +97,16 @@ FEATURED_PROJECTS = [
         "cta": "Ver demo",
     },
     {
-        "title": "WhatStats",
+        "title": "WhatsInChat",
         "icon": "📈",
         "description": (
-            "Analizador de estadísticas de conversaciones de WhatsApp: procesa el export del chat "
-            "y genera métricas de actividad (mensajes por persona, horas de mayor actividad, "
-            "emojis más usados, etc.)."
+            "Analizador gratuito y sin registro de chats y grupos de WhatsApp: a partir del export "
+            "genera un ranking de quién escribe más, las horas de mayor actividad, un mapa de palabras, "
+            "la afinidad entre miembros (quién responde a quién), perfiles de estilo de cada persona "
+            "y búsqueda de palabras clave personalizadas."
         ),
         "stack": ["Python", "Procesamiento de datos", "Render"],
-        "url": "https://whatstats.onrender.com/",
+        "url": "https://whatsinchat.onrender.com/",
         "cta": "Ver demo",
     },
 ]

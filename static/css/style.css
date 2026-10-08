@@ -111,11 +111,17 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   justify-content: space-between;
 }
 .nav__brand {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.nav__brand .dot { color: var(--accent); }
+.nav__brand img { display: block; border-radius: 10px; }
+.nav__brand:hover {
+  transform: translateY(-1px) rotate(-4deg);
+  box-shadow: 0 8px 24px -10px rgba(94, 234, 212, 0.55);
+}
 .nav__links { display: flex; gap: 28px; }
 .nav__links a {
   position: relative;
