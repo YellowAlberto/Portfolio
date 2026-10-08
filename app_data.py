@@ -23,7 +23,7 @@ STACK = [
     {
         "category": "Lenguajes",
         "icon": "💻",
-        "skills": ["Python", "R", "SQL"],
+        "skills": ["Python", "JavaScript", "PHP", "R", "SQL"],
     },
     {
         "category": "Big Data",
@@ -73,12 +73,12 @@ STACK = [
     {
         "category": "Backend / APIs",
         "icon": "🔌",
-        "skills": ["FastAPI", "Flask", "JWT", "SQLAlchemy", "Gradio", "OpenAPI / Swagger"],
+        "skills": ["FastAPI", "Flask", "Spring Boot", "JWT", "SQLAlchemy", "JPA / Hibernate", "JUnit", "Gradio", "OpenAPI / Swagger"],
     },
     {
         "category": "Desarrollo Web",
         "icon": "🌐",
-        "skills": ["HTML5", "CSS3", "JavaScript", "Jinja2", "Diseño responsive"],
+        "skills": ["HTML5", "CSS3", "Jinja2", "Diseño responsive"],
     },
 ]
 
