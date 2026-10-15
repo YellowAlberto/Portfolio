@@ -139,16 +139,18 @@ OTHER_PROJECTS = [
         "cta": None,
     },
     {
-        "title": "Pipeline de streaming en tiempo real",
+        "title": "SmartParkingFlow — Pipeline de streaming IoT",
         "icon": "🔄",
         "description": (
-            "Arquitectura de ingesta y consulta de datos en streaming: Kafka como cola de mensajes, "
-            "NiFi para el flujo de datos, MongoDB como almacenamiento y Dremio como capa de consulta, "
-            "con una app Flask como productor de datos."
+            "Sistema de aparcamiento inteligente para una Smart City: los sensores de cada plaza envían "
+            "su estado en streaming a Kafka, NiFi orquesta el flujo hacia colecciones de MongoDB "
+            "(estado actual e histórico), Dremio sirve de capa de análisis y una app Flask muestra "
+            "en un mapa la ocupación en tiempo real."
         ),
         "stack": ["Kafka", "NiFi", "MongoDB", "Dremio", "Flask"],
         "url": None,
         "cta": None,
+        "docs": [{"label": "Memoria del proyecto (PDF)", "url": "/static/docs/smartparking.pdf"}],
     },
     {
         "title": "ETL en AWS con modelo en estrella",
