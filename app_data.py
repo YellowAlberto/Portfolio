@@ -76,6 +76,11 @@ STACK = [
         "skills": ["FastAPI", "Flask", "Spring Boot", "JWT", "SQLAlchemy", "JPA / Hibernate", "JUnit", "Gradio", "OpenAPI / Swagger"],
     },
     {
+        "category": "SAP (en formación)",
+        "icon": "🔷",
+        "skills": ["SAP BTP", "SAP Business Application Studio", "CAP (Node.js)", "CDS", "OData V4", "Fiori Elements"],
+    },
+    {
         "category": "Desarrollo Web",
         "icon": "🌐",
         "skills": ["HTML5", "CSS3", "Jinja2", "Diseño responsive"],
@@ -108,6 +113,24 @@ FEATURED_PROJECTS = [
         "stack": ["Python", "Procesamiento de datos", "Render"],
         "url": "https://whatsinchat.onrender.com/",
         "cta": "Ver demo",
+    },
+]
+
+# Proyectos SAP (actualmente en formación)
+SAP_PROJECTS = [
+    {
+        "title": "Caso práctico: gestión de tienda con CAP y Fiori Elements",
+        "icon": "🔷",
+        "status": "En formación",
+        "description": (
+            "Aplicación de gestión de categorías y compras de una tienda, construida desde cero en "
+            "SAP Business Application Studio sobre SAP BTP. Modelo de datos en CDS con relación "
+            "1:N (Composition), servicio OData V4 con CAP y SQLite, interfaz SAP Fiori Elements "
+            "con lista y ficha de detalle, y gestión de borradores (Draft) para crear, editar, "
+            "guardar y cancelar cambios. Incluye pruebas funcionales y validaciones."
+        ),
+        "stack": ["SAP BTP", "CAP", "CDS", "OData V4", "Fiori Elements", "Node.js", "SQLite"],
+        "docs": [{"label": "Memoria del proyecto (PDF)", "url": "/static/docs/sap-cap-tienda.pdf"}],
     },
 ]
 

@@ -4,7 +4,7 @@ import sys
 # Allow importing the app package from the project root when running on Vercel
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app_data import STACK, FEATURED_PROJECTS, OTHER_PROJECTS, PROFILE
+from app_data import STACK, FEATURED_PROJECTS, OTHER_PROJECTS, SAP_PROJECTS, PROFILE
 from flask import Flask, render_template, send_from_directory
 
 app = Flask(
@@ -21,6 +21,7 @@ def home():
         stack=STACK,
         featured_projects=FEATURED_PROJECTS,
         other_projects=OTHER_PROJECTS,
+        sap_projects=SAP_PROJECTS,
         profile=PROFILE,
     )
 

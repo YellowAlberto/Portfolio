@@ -1,0 +1,14 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'api/index.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app_data.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'requirements.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'static/css/style.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'static/favicon.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'vercel.json', LF will be replaced by CRLF the next time Git touches it
+ api/index.py         |  3 [32m++[m[31m-[m
+ app_data.py          | 23 [32m+++++++++++++++++++++++[m
+ static/css/style.css | 25 [32m+++++++++++++++++++++++++[m
+ templates/index.html | 39 [32m++++++++++++++++++++++++++++++++++++++[m[31m-[m
+ 4 files changed, 88 insertions(+), 2 deletions(-)

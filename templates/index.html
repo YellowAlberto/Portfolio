@@ -32,6 +32,7 @@
       <nav class="nav__links" id="navLinks">
         <a href="#stack">Stack</a>
         <a href="#proyectos">Proyectos</a>
+        <a href="#sap">SAP</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -138,9 +139,45 @@
       </div>
     </section>
 
+    <section id="sap" class="section">
+      <div class="section__head reveal">
+        <span class="section__idx">03</span>
+        <h2 class="section__title">SAP · En formación</h2>
+        <p class="section__subtitle">Actualmente me estoy formando en SAP y preparándome para obtener certificaciones oficiales</p>
+      </div>
+      <div class="featured-grid featured-grid--single">
+        {% for p in sap_projects %}
+        <article class="featured-card featured-card--sap reveal">
+          <div class="featured-card__glow" aria-hidden="true"></div>
+          <div class="featured-card__body">
+            <div class="featured-card__top">
+              <div class="featured-card__icon">{{ p.icon }}</div>
+              {% if p.status %}<span class="pill">{{ p.status }}</span>{% endif %}
+            </div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <ul class="tag-list">
+              {% for t in p.stack %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+            </ul>
+          </div>
+          {% if p.docs %}
+          <div class="doc-links">
+            {% for d in p.docs %}
+            <a class="doc-link" href="{{ d.url }}" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              {{ d.label }}
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
     <section id="contacto" class="section section--contact">
       <div class="contact-card reveal">
-        <span class="section__idx">03</span>
+        <span class="section__idx">04</span>
         <h2 class="section__title">¿Hablamos?</h2>
         <p class="contact__text">Si tienes un proyecto, una oportunidad o simplemente quieres charlar de datos e IA, escríbeme.</p>
         <div class="contact__links">

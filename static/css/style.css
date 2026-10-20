@@ -395,6 +395,31 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
 .featured-card h3 { margin: 0 0 10px; font-size: 1.3rem; }
 .featured-card p { color: var(--text-muted); margin: 0 0 18px; font-size: 0.95rem; }
 
+.featured-grid--single { grid-template-columns: minmax(0, 760px); }
+.featured-card--sap { border-color: rgba(167, 139, 250, 0.28); }
+.featured-card--sap:hover {
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.15), 0 20px 60px -20px rgba(167, 139, 250, 0.3);
+}
+.featured-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-violet);
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 999px;
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+
 /* -------------------- Other projects -------------------- */
 .project-grid {
   display: grid;
