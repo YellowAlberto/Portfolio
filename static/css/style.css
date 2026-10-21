@@ -9,6 +9,8 @@
   --accent: #5eead4;
   --accent-strong: #fbbf24;
   --accent-violet: #a78bfa;
+  --grad-start: #fbbf24;
+  --grad-end: #fff3d1;
   --shadow-glow: 0 0 0 1px rgba(94, 234, 212, 0.12), 0 20px 60px -20px rgba(94, 234, 212, 0.25);
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -294,7 +296,7 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   line-height: 1.15;
 }
 .gradient-text {
-  background: linear-gradient(100deg, var(--accent) 10%, var(--accent-strong) 55%, var(--accent-violet) 90%);
+  background: linear-gradient(100deg, var(--grad-start), var(--grad-end));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -326,7 +328,7 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   cursor: pointer;
 }
 .btn--primary {
-  background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+  background: linear-gradient(120deg, var(--grad-start), var(--grad-end));
   color: #04211d;
 }
 .btn--primary:hover {
