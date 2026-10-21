@@ -9,8 +9,8 @@ PROFILE = {
     "name": "Alberto Piedra Venegas",
     "role": "Desarrollador Big Data, IA & Desarrollo Web",
     "tagline": (
-        "Construyo pipelines de datos, modelos de IA/ML, agentes inteligentes y aplicaciones "
-        "web de extremo a extremo: desde la ingesta de datos hasta el despliegue en producción."
+        "Me apasiona crear software y aprender nuevas tecnologías. Desarrollo aplicaciones web, "
+        "soluciones de datos e inteligencia artificial, siempre con ganas de seguir creciendo."
     ),
     "email": "albertopiedra155@gmail.com",
     "github": "https://github.com/YellowAlberto",
