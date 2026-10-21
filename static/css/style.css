@@ -139,12 +139,19 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   bottom: 0;
   width: 0;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
   border-radius: 2px;
   transition: width 0.2s ease;
 }
 .nav__links a:hover { color: var(--text); }
-.nav__links a.is-active { color: var(--accent); }
+.nav__links a.is-active,
+.nav__dropbtn.is-active {
+  background: linear-gradient(100deg, var(--grad-start), var(--grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nav__dropbtn.is-active .nav__caret { color: var(--grad-start); }
 .nav__links a.is-active::after { width: 100%; }
 
 /* Desplegable "Proyectos" */
@@ -164,7 +171,6 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
 }
 .nav__dropbtn:hover,
 .nav__dropdown.is-open .nav__dropbtn { color: var(--text); }
-.nav__dropbtn.is-active { color: var(--accent); }
 .nav__caret { transition: transform 0.2s ease; }
 .nav__dropdown.is-open .nav__caret { transform: rotate(180deg); }
 .nav__menu {
@@ -203,7 +209,7 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   white-space: nowrap;
 }
 .nav__links .nav__menu a::after { display: none; }
-.nav__links .nav__menu a:hover { background: rgba(94, 234, 212, 0.08); color: var(--accent); }
+.nav__links .nav__menu a:hover { background: rgba(251, 191, 36, 0.09); color: var(--grad-start); }
 
 .nav__toggle {
   display: none;
