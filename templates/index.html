@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=10) }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=11) }}" />
 </head>
 <body>
 {% macro carousel(images, title) %}
@@ -150,7 +150,7 @@
           <div class="featured-card__glow" aria-hidden="true"></div>
           <div class="featured-card__body">
             {{ carousel(p.images, p.title) }}
-            <div class="featured-card__icon">{{ p.icon }}</div>
+            {% if not p.images %}<div class="featured-card__icon">{{ p.icon }}</div>{% endif %}
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
             <ul class="tag-list">
@@ -172,7 +172,7 @@
         {% for p in other_projects %}
         <article class="project-card reveal" style="--delay: {{ loop.index0 * 50 }}ms">
           {{ carousel(p.images, p.title) }}
-          <div class="project-card__icon">{{ p.icon }}</div>
+          {% if not p.images %}<div class="project-card__icon">{{ p.icon }}</div>{% endif %}
           <h4>{{ p.title }}</h4>
           <p>{{ p.description }}</p>
           <ul class="tag-list">
