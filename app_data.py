@@ -96,6 +96,13 @@ STACK = [
 ]
 
 # Proyectos personales: iniciativas propias, desplegadas y accesibles en vivo
+# Carrusel de imágenes (opcional) en cualquier proyecto personal o de formación:
+# copia las capturas a static/img/projects/ y añade al proyecto, por ejemplo:
+#   "images": [
+#       {"src": "img/projects/reciclia-1.png", "caption": "Pantalla principal"},
+#       "img/projects/reciclia-2.png",
+#   ],
+# Si no pones "images", la tarjeta se queda sin carrusel.
 FEATURED_PROJECTS = [
     {
         "title": "Inazuma Fantasy",
@@ -119,6 +126,13 @@ FEATURED_PROJECTS = [
             "y búsqueda de palabras clave personalizadas."
         ),
         "stack": ["Python", "Procesamiento de datos", "Render"],
+        "images": [
+            {"src": "img/projects/whatsinchat-1-inicio.webp", "caption": "Sube tu chat de WhatsApp (.zip o .txt) y obtén el análisis al instante"},
+            {"src": "img/projects/whatsinchat-2-ranking.webp", "caption": "Ranking de los miembros más activos del grupo"},
+            {"src": "img/projects/whatsinchat-3-heatmap.webp", "caption": "Actividad por día de la semana y hora"},
+            {"src": "img/projects/whatsinchat-4-conceptos.webp", "caption": "Mapa de conceptos: las palabras más usadas"},
+            {"src": "img/projects/whatsinchat-5-perfil.webp", "caption": "Perfil de cada miembro y su estilo en el grupo"},
+        ],
         "url": "https://whatsinchat.onrender.com/",
         "cta": "Ver demo",
     },

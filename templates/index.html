@@ -23,9 +23,41 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=8) }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=10) }}" />
 </head>
 <body>
+{% macro carousel(images, title) %}
+{% if images %}
+<div class="carousel" data-carousel role="group" aria-roledescription="carrusel" aria-label="Capturas de {{ title }}">
+  <div class="carousel__track" tabindex="0">
+    {% for img in images %}
+    {% set src = img.src if img is mapping else img %}
+    {% set alt = img.alt if (img is mapping and img.alt) else (title ~ " — captura " ~ loop.index) %}
+    <figure class="carousel__slide" data-caption="{{ img.caption if (img is mapping and img.caption) else '' }}">
+      <img src="{{ url_for('static', filename=src) }}" alt="{{ alt }}" loading="lazy" />
+    </figure>
+    {% endfor %}
+  </div>
+  {% if images|length > 1 %}
+  <button type="button" class="carousel__btn carousel__btn--prev" aria-label="Imagen anterior">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m15 5-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="carousel__btn carousel__btn--next" aria-label="Imagen siguiente">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  {% endif %}
+  <div class="carousel__bar">
+    <span class="carousel__caption" aria-live="polite"></span>
+    {% if images|length > 1 %}
+    <div class="carousel__dots">
+      {% for img in images %}<button type="button" class="carousel__dot" aria-label="Ir a la imagen {{ loop.index }}"></button>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
 
   <div class="bg-fx" aria-hidden="true">
     <div class="bg-fx__glow bg-fx__glow--a"></div>
@@ -117,6 +149,7 @@
         <article class="featured-card reveal" style="--delay: {{ loop.index0 * 80 }}ms">
           <div class="featured-card__glow" aria-hidden="true"></div>
           <div class="featured-card__body">
+            {{ carousel(p.images, p.title) }}
             <div class="featured-card__icon">{{ p.icon }}</div>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
@@ -138,6 +171,7 @@
       <div class="project-grid">
         {% for p in other_projects %}
         <article class="project-card reveal" style="--delay: {{ loop.index0 * 50 }}ms">
+          {{ carousel(p.images, p.title) }}
           <div class="project-card__icon">{{ p.icon }}</div>
           <h4>{{ p.title }}</h4>
           <p>{{ p.description }}</p>
@@ -342,6 +376,61 @@
       );
       sections.forEach((s) => navIo.observe(s));
     }
+
+    // Carruseles de imágenes de proyectos (con visor ampliado)
+    const lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.innerHTML = '<button type="button" class="lightbox__close" aria-label="Cerrar">&times;</button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Anterior">&#8249;</button>' +
+      '<figure class="lightbox__fig"><img alt="" /><figcaption></figcaption></figure>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Siguiente">&#8250;</button>';
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector("img");
+    const lbCap = lb.querySelector("figcaption");
+    let lbSlides = [], lbIdx = 0;
+    const lbShow = (i) => {
+      lbIdx = (i + lbSlides.length) % lbSlides.length;
+      const sl = lbSlides[lbIdx], im = sl.querySelector("img");
+      lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = sl.dataset.caption || "";
+      lb.classList.toggle("is-single", lbSlides.length < 2);
+    };
+    const lbClose = () => { lb.classList.remove("is-open"); document.body.style.overflow = ""; };
+    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".lightbox__close")) lbClose(); });
+    lb.querySelector(".lightbox__nav--prev").addEventListener("click", () => lbShow(lbIdx - 1));
+    lb.querySelector(".lightbox__nav--next").addEventListener("click", () => lbShow(lbIdx + 1));
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("is-open")) return;
+      if (e.key === "Escape") lbClose();
+      if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
+      if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+    });
+
+    document.querySelectorAll("[data-carousel]").forEach((c) => {
+      const track = c.querySelector(".carousel__track");
+      const slides = [...c.querySelectorAll(".carousel__slide")];
+      const dots = c.querySelectorAll(".carousel__dot");
+      const cap = c.querySelector(".carousel__caption");
+      const current = () => Math.round(track.scrollLeft / track.clientWidth);
+      const go = (i) => track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+      const update = () => {
+        const i = current();
+        dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+        cap.textContent = (slides[i] && slides[i].dataset.caption) || "";
+      };
+      track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+      update();
+      slides.forEach((sl, k) => sl.addEventListener("click", () => {
+        lbSlides = slides; lbShow(k); lb.classList.add("is-open"); document.body.style.overflow = "hidden";
+      }));
+      if (!dots.length) return;
+      c.querySelector(".carousel__btn--prev").addEventListener("click", () => go((current() - 1 + slides.length) % slides.length));
+      c.querySelector(".carousel__btn--next").addEventListener("click", () => go((current() + 1) % slides.length));
+      dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+      track.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); go(Math.min(current() + 1, slides.length - 1)); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); go(Math.max(current() - 1, 0)); }
+      });
+    });
 
     // Botón "volver arriba"
     const backToTop = document.getElementById("backToTop");
