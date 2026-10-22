@@ -56,7 +56,7 @@ STACK = [
     {
         "category": "DevOps",
         "icon": "⚙️",
-        "skills": ["Docker", "Docker Compose", "Dev Containers", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
+        "skills": ["Docker", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
     },
     {
         "category": "Machine Learning",
@@ -91,7 +91,7 @@ STACK = [
     {
         "category": "Desarrollo Web",
         "icon": "🌐",
-        "skills": ["HTML5", "CSS3", "Jinja2", "Diseño responsive"],
+        "skills": ["HTML5", "CSS3", "Diseño responsive"],
     },
 ]
 
@@ -164,7 +164,7 @@ OTHER_PROJECTS = [
         "description": (
             "Ecosistema de IA para fomentar el reciclaje: detección de residuos con YOLOv8, "
             "agente conversacional con Groq, backend FastAPI con autenticación JWT, "
-            "base de datos híbrida PostgreSQL/SQLite, frontend en Gradio, Docker Compose "
+            "base de datos híbrida PostgreSQL/SQLite, frontend en Gradio "
             "y despliegue continuo con GitHub Actions a Hugging Face Spaces."
         ),
         "stack": ["FastAPI", "YOLOv8", "Groq", "Docker", "CI/CD"],
