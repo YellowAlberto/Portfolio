@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=6) }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=7) }}" />
 </head>
 <body>
 
@@ -41,6 +41,7 @@
             <a href="#sap">SAP</a>
           </div>
         </div>
+        <a href="#formacion">Formación</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -187,9 +188,36 @@
       </div>
     </section>
 
+    <section id="formacion" class="section">
+      <div class="section__head reveal">
+        <span class="section__idx">04</span>
+        <h2 class="section__title">Formación</h2>
+        <p class="section__subtitle">Mi recorrido académico y la formación que estoy haciendo ahora</p>
+      </div>
+      <ol class="timeline">
+        {% for e in education %}
+        <li class="timeline__item{% if e.current %} timeline__item--current{% endif %} reveal">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <div class="timeline__card">
+            <div class="timeline__top">
+              <span class="timeline__period">{{ e.period }}</span>
+              {% if e.current %}<span class="pill">En curso</span>{% endif %}
+            </div>
+            <h3>{{ e.title }}</h3>
+            <p class="timeline__center">{{ e.center }}</p>
+            <p class="timeline__desc">{{ e.description }}</p>
+            <ul class="tag-list">
+              {% for t in e.tags %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+
     <section id="contacto" class="section section--contact">
       <div class="contact-card reveal">
-        <span class="section__idx">04</span>
+        <span class="section__idx">05</span>
         <h2 class="section__title">¿Hablamos?</h2>
         <p class="contact__text">Si tienes un proyecto, una oportunidad o simplemente quieres charlar de datos e IA, escríbeme.</p>
         <div class="contact__links">
