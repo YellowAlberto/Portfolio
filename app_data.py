@@ -241,3 +241,41 @@ OTHER_PROJECTS = [
         "docs": [{"label": "Memoria del dashboard (PDF)", "url": "/static/docs/dashboard-prometheus.pdf"}],
     },
 ]
+
+
+# Sección "Formación" (de más reciente a más antigua)
+EDUCATION = [
+    {
+        "title": "SAP ABAP y SAP BTP",
+        "center": "Experis",
+        "period": "Oct. 2026 – Nov. 2026",
+        "current": True,
+        "description": (
+            "Formación en desarrollo SAP con ABAP Cloud y SAP BTP, orientada a la "
+            "preparación de certificaciones oficiales."
+        ),
+        "tags": ["ABAP Cloud", "SAP BTP", "CAP", "Fiori Elements"],
+    },
+    {
+        "title": "Curso de Especialización en Inteligencia Artificial y Big Data",
+        "center": "IES Fernando Aguilar Quignon",
+        "period": "Sept. 2025 – May. 2026",
+        "current": False,
+        "description": (
+            "Pipelines de datos en streaming, ETL en la nube, modelos de visión "
+            "artificial, sistemas RAG y agentes inteligentes."
+        ),
+        "tags": ["Python", "Big Data", "IA / ML", "AWS"],
+    },
+    {
+        "title": "Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
+        "center": "IES Ntra. Sra. de los Remedios",
+        "period": "Sept. 2020 – Jun. 2022",
+        "current": False,
+        "description": (
+            "Desarrollo de aplicaciones web completas, tanto en cliente como en servidor, "
+            "con bases de datos y pruebas."
+        ),
+        "tags": ["JavaScript", "PHP", "Spring Boot", "JPA / Hibernate", "JUnit"],
+    },
+]
