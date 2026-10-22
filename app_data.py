@@ -14,6 +14,14 @@ PROFILE = {
     ),
     "email": "albertopiedra155@gmail.com",
     "github": "https://github.com/YellowAlberto",
+    # Pega aquí la URL de tu perfil, p. ej. "https://www.linkedin.com/in/tu-usuario/".
+    # Si lo dejas vacío, el botón no se muestra.
+    "linkedin": "https://www.linkedin.com/in/alberto-piedra-venegas/",
+    # Ruta del CV dentro de /static, p. ej. "docs/cv-alberto-piedra.pdf".
+    # Si lo dejas vacío, el botón no se muestra.
+    "cv": "",
+    # URL pública de la web (se usa en la vista previa al compartir el enlace).
+    "site_url": "https://portfolio-eight-green-ikjuxpkmp9.vercel.app",
     "location": "España",
 }
 
