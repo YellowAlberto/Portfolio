@@ -7,7 +7,7 @@ no hace falta tocar el HTML.
 
 PROFILE = {
     "name": "Alberto Piedra Venegas",
-    "role": "Desarrollador de Software:",
+    "role": "Desarrollador Big Data, IA & Desarrollo Web",
     "tagline": (
         "Me apasiona crear software y aprender nuevas tecnologías. Desarrollo aplicaciones web, "
         "soluciones de datos e inteligencia artificial, siempre con ganas de seguir creciendo."
