@@ -21,7 +21,7 @@ PROFILE = {
     # Si lo dejas vacío, el botón no se muestra.
     "cv": "",
     # URL pública de la web (se usa en la vista previa al compartir el enlace).
-    "site_url": "https://portfolio-eight-green-ikjuxpkmp9.vercel.app",
+    "site_url": "https://alberto-piedra.vercel.app",
     "location": "España",
 }
 
