@@ -9,11 +9,19 @@ PROFILE = {
     "name": "Alberto Piedra Venegas",
     "role": "Desarrollador Big Data, IA & Desarrollo Web",
     "tagline": (
-        "Construyo pipelines de datos, modelos de IA/ML, agentes inteligentes y aplicaciones "
-        "web de extremo a extremo: desde la ingesta de datos hasta el despliegue en producción."
+        "Me apasiona crear software y aprender nuevas tecnologías. Desarrollo aplicaciones web, "
+        "soluciones de datos e inteligencia artificial, siempre con ganas de seguir creciendo."
     ),
     "email": "albertopiedra155@gmail.com",
     "github": "https://github.com/YellowAlberto",
+    # Pega aquí la URL de tu perfil, p. ej. "https://www.linkedin.com/in/tu-usuario/".
+    # Si lo dejas vacío, el botón no se muestra.
+    "linkedin": "https://www.linkedin.com/in/alberto-piedra-venegas/",
+    # Ruta del CV dentro de /static, p. ej. "docs/cv-alberto-piedra.pdf".
+    # Si lo dejas vacío, el botón no se muestra.
+    "cv": "",
+    # URL pública de la web (se usa en la vista previa al compartir el enlace).
+    "site_url": "https://portfolio-eight-green-ikjuxpkmp9.vercel.app",
     "location": "España",
 }
 
@@ -48,7 +56,7 @@ STACK = [
     {
         "category": "DevOps",
         "icon": "⚙️",
-        "skills": ["Docker", "Docker Compose", "Dev Containers", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
+        "skills": ["Docker", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
     },
     {
         "category": "Machine Learning",
@@ -76,13 +84,25 @@ STACK = [
         "skills": ["FastAPI", "Flask", "Spring Boot", "JWT", "SQLAlchemy", "JPA / Hibernate", "JUnit", "Gradio", "OpenAPI / Swagger"],
     },
     {
+        "category": "SAP (en formación)",
+        "icon": "🔷",
+        "skills": ["ABAP (POO)", "Eclipse ADT", "SAP BTP", "SAP Business Application Studio", "CAP (Node.js)", "CDS", "OData V4", "Fiori Elements"],
+    },
+    {
         "category": "Desarrollo Web",
         "icon": "🌐",
-        "skills": ["HTML5", "CSS3", "Jinja2", "Diseño responsive"],
+        "skills": ["HTML5", "CSS3", "Diseño responsive"],
     },
 ]
 
 # Proyectos personales: iniciativas propias, desplegadas y accesibles en vivo
+# Carrusel de imágenes (opcional) en cualquier proyecto personal o de formación:
+# copia las capturas a static/img/projects/ y añade al proyecto, por ejemplo:
+#   "images": [
+#       {"src": "img/projects/reciclia-1.png", "caption": "Pantalla principal"},
+#       "img/projects/reciclia-2.png",
+#   ],
+# Si no pones "images", la tarjeta se queda sin carrusel.
 FEATURED_PROJECTS = [
     {
         "title": "Inazuma Fantasy",
@@ -106,8 +126,47 @@ FEATURED_PROJECTS = [
             "y búsqueda de palabras clave personalizadas."
         ),
         "stack": ["Python", "Procesamiento de datos", "Render"],
+        "images": [
+            {"src": "img/projects/whatsinchat-1-inicio.webp", "caption": "Sube tu chat de WhatsApp (.zip o .txt) y obtén el análisis al instante"},
+            {"src": "img/projects/whatsinchat-2-ranking.webp", "caption": "Ranking de los miembros más activos del grupo"},
+            {"src": "img/projects/whatsinchat-3-heatmap.webp", "caption": "Actividad por día de la semana y hora"},
+            {"src": "img/projects/whatsinchat-4-conceptos.webp", "caption": "Mapa de conceptos: las palabras más usadas"},
+            {"src": "img/projects/whatsinchat-5-perfil.webp", "caption": "Perfil de cada miembro y su estilo en el grupo"},
+        ],
         "url": "https://whatsinchat.onrender.com/",
         "cta": "Ver demo",
+    },
+]
+
+# Proyectos SAP (actualmente en formación)
+SAP_PROJECTS = [
+    {
+        "title": "Caso práctico: gestión de tienda con CAP y Fiori Elements",
+        "icon": "🔷",
+        "status": "En formación",
+        "description": (
+            "Aplicación de gestión de categorías y compras de una tienda, construida desde cero en "
+            "SAP Business Application Studio sobre SAP BTP. Modelo de datos en CDS con relación "
+            "1:N (Composition), servicio OData V4 con CAP y SQLite, interfaz SAP Fiori Elements "
+            "con lista y ficha de detalle, y gestión de borradores (Draft) para crear, editar, "
+            "guardar y cancelar cambios. Incluye pruebas funcionales y validaciones."
+        ),
+        "stack": ["SAP BTP", "CAP", "CDS", "OData V4", "Fiori Elements", "Node.js", "SQLite"],
+        "docs": [{"label": "Memoria del proyecto (PDF)", "url": "/static/docs/sap-cap-tienda.pdf"}],
+    },
+    {
+        "title": "Caso práctico: gestión de flota aérea con ABAP orientado a objetos",
+        "icon": "✈️",
+        "status": "En formación",
+        "description": (
+            "Sistema de gestión de flota para una aerolínea desarrollado en Eclipse con ABAP "
+            "Development Tools. Clase padre Aeronave con control de horas de vuelo y revisiones "
+            "obligatorias, clases hijas de carga y pasajeros con herencia y redefinición de "
+            "métodos, clase de taller de mantenimiento, utilidades estáticas y clases de prueba "
+            "que validan las reglas de negocio y los casos límite."
+        ),
+        "stack": ["ABAP", "ABAP OO", "Herencia", "Eclipse ADT", "Clases de prueba"],
+        "docs": [{"label": "Memoria del proyecto (PDF)", "url": "/static/docs/abap-aeronave.pdf"}],
     },
 ]
 
@@ -119,7 +178,7 @@ OTHER_PROJECTS = [
         "description": (
             "Ecosistema de IA para fomentar el reciclaje: detección de residuos con YOLOv8, "
             "agente conversacional con Groq, backend FastAPI con autenticación JWT, "
-            "base de datos híbrida PostgreSQL/SQLite, frontend en Gradio, Docker Compose "
+            "base de datos híbrida PostgreSQL/SQLite, frontend en Gradio "
             "y despliegue continuo con GitHub Actions a Hugging Face Spaces."
         ),
         "stack": ["FastAPI", "YOLOv8", "Groq", "Docker", "CI/CD"],
@@ -216,5 +275,43 @@ OTHER_PROJECTS = [
         "url": None,
         "cta": None,
         "docs": [{"label": "Memoria del dashboard (PDF)", "url": "/static/docs/dashboard-prometheus.pdf"}],
+    },
+]
+
+
+# Sección "Formación" (de más reciente a más antigua)
+EDUCATION = [
+    {
+        "title": "SAP ABAP y SAP BTP",
+        "center": "Experis",
+        "period": "Oct. 2026 – Nov. 2026",
+        "current": True,
+        "description": (
+            "Formación en desarrollo SAP con ABAP Cloud y SAP BTP, orientada a la "
+            "preparación de certificaciones oficiales."
+        ),
+        "tags": ["ABAP Cloud", "SAP BTP", "CAP", "Fiori Elements"],
+    },
+    {
+        "title": "Curso de Especialización en Inteligencia Artificial y Big Data",
+        "center": "IES Fernando Aguilar Quignon",
+        "period": "Sept. 2025 – May. 2026",
+        "current": False,
+        "description": (
+            "Pipelines de datos en streaming, ETL en la nube, modelos de visión "
+            "artificial, sistemas RAG y agentes inteligentes."
+        ),
+        "tags": ["Python", "Big Data", "IA / ML", "AWS"],
+    },
+    {
+        "title": "Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (DAW)",
+        "center": "IES Ntra. Sra. de los Remedios",
+        "period": "Sept. 2020 – Jun. 2022",
+        "current": False,
+        "description": (
+            "Desarrollo de aplicaciones web completas, tanto en cliente como en servidor, "
+            "con bases de datos y pruebas."
+        ),
+        "tags": ["JavaScript", "PHP", "Spring Boot", "JPA / Hibernate", "JUnit"],
     },
 ]

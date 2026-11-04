@@ -5,15 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ profile.name }} · Portfolio</title>
   <meta name="description" content="{{ profile.tagline }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ profile.name }} · Portfolio" />
+  <meta property="og:description" content="{{ profile.tagline }}" />
+  <meta property="og:url" content="{{ profile.site_url }}/" />
+  <meta property="og:image" content="{{ profile.site_url }}{{ url_for('static', filename='og-image.png', v=2) }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ profile.name }} · Portfolio" />
+  <meta name="twitter:description" content="{{ profile.tagline }}" />
+  <meta name="twitter:image" content="{{ profile.site_url }}{{ url_for('static', filename='og-image.png', v=2) }}" />
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=13) }}" />
 </head>
 <body>
+{% macro carousel(images, title) %}
+{% if images %}
+<div class="carousel" data-carousel role="group" aria-roledescription="carrusel" aria-label="Capturas de {{ title }}">
+  <div class="carousel__track" tabindex="0">
+    {% for img in images %}
+    {% set src = img.src if img is mapping else img %}
+    {% set alt = img.alt if (img is mapping and img.alt) else (title ~ " — captura " ~ loop.index) %}
+    <figure class="carousel__slide" data-caption="{{ img.caption if (img is mapping and img.caption) else '' }}">
+      <img src="{{ url_for('static', filename=src) }}" alt="{{ alt }}" loading="lazy" />
+    </figure>
+    {% endfor %}
+  </div>
+  {% if images|length > 1 %}
+  <button type="button" class="carousel__btn carousel__btn--prev" aria-label="Imagen anterior">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m15 5-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="carousel__btn carousel__btn--next" aria-label="Imagen siguiente">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  {% endif %}
+  <div class="carousel__bar">
+    <span class="carousel__caption" aria-live="polite"></span>
+    {% if images|length > 1 %}
+    <div class="carousel__dots">
+      {% for img in images %}<button type="button" class="carousel__dot" aria-label="Ir a la imagen {{ loop.index }}"></button>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
 
   <div class="bg-fx" aria-hidden="true">
     <div class="bg-fx__glow bg-fx__glow--a"></div>
@@ -31,7 +75,17 @@
       </button>
       <nav class="nav__links" id="navLinks">
         <a href="#stack">Stack</a>
-        <a href="#proyectos">Proyectos</a>
+        <div class="nav__dropdown" id="navDrop">
+          <button type="button" class="nav__dropbtn" id="navDropBtn" aria-haspopup="true" aria-expanded="false">
+            Proyectos
+            <svg class="nav__caret" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav__menu">
+            <a href="#ia-bigdata">IA y Big Data</a>
+            <a href="#sap">SAP</a>
+          </div>
+        </div>
+        <a href="#formacion">Formación</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -47,12 +101,17 @@
         Hola, soy <span class="gradient-text">{{ profile.name.split(" ")[0] }} {{ profile.name.split(" ")[1] }}</span>
       </h1>
       <p class="hero__tagline reveal">{{ profile.tagline }}</p>
+      <a class="hero__sap reveal" href="#sap">
+        <span class="hero__sap-icon">🔷</span>
+        Estudiando SAP · En proceso de obtener certificaciones oficiales
+      </a>
       <div class="hero__actions reveal">
         <a class="btn btn--primary" href="#proyectos">
           Ver proyectos
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn--ghost" href="mailto:{{ profile.email }}">Contactar</a>
+        {% if profile.cv %}<a class="btn btn--ghost" href="{{ url_for('static', filename=profile.cv) }}" download>Descargar CV</a>{% endif %}
       </div>
     </section>
 
@@ -90,7 +149,8 @@
         <article class="featured-card reveal" style="--delay: {{ loop.index0 * 80 }}ms">
           <div class="featured-card__glow" aria-hidden="true"></div>
           <div class="featured-card__body">
-            <div class="featured-card__icon">{{ p.icon }}</div>
+            {{ carousel(p.images, p.title) }}
+            {% if not p.images %}<div class="featured-card__icon">{{ p.icon }}</div>{% endif %}
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
             <ul class="tag-list">
@@ -107,11 +167,12 @@
         {% endfor %}
       </div>
 
-      <h3 class="subsection__title reveal">Proyectos de formación · Big Data &amp; IA</h3>
+      <h3 id="ia-bigdata" class="subsection__title reveal">Proyectos de formación · Big Data &amp; IA</h3>
       <div class="project-grid">
         {% for p in other_projects %}
         <article class="project-card reveal" style="--delay: {{ loop.index0 * 50 }}ms">
-          <div class="project-card__icon">{{ p.icon }}</div>
+          {{ carousel(p.images, p.title) }}
+          {% if not p.images %}<div class="project-card__icon">{{ p.icon }}</div>{% endif %}
           <h4>{{ p.title }}</h4>
           <p>{{ p.description }}</p>
           <ul class="tag-list">
@@ -138,9 +199,72 @@
       </div>
     </section>
 
+    <section id="sap" class="section">
+      <div class="section__head reveal">
+        <span class="section__idx">03</span>
+        <h2 class="section__title">SAP · En formación</h2>
+        <p class="section__subtitle">Actualmente me estoy formando en SAP y preparándome para obtener certificaciones oficiales</p>
+      </div>
+      <div class="featured-grid{% if sap_projects|length < 2 %} featured-grid--single{% endif %}">
+        {% for p in sap_projects %}
+        <article class="featured-card featured-card--sap reveal">
+          <div class="featured-card__glow" aria-hidden="true"></div>
+          <div class="featured-card__body">
+            <div class="featured-card__top">
+              <div class="featured-card__icon">{{ p.icon }}</div>
+              {% if p.status %}<span class="pill">{{ p.status }}</span>{% endif %}
+            </div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <ul class="tag-list">
+              {% for t in p.stack %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+            </ul>
+          </div>
+          {% if p.docs %}
+          <div class="doc-links">
+            {% for d in p.docs %}
+            <a class="doc-link" href="{{ d.url }}" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              {{ d.label }}
+            </a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="formacion" class="section">
+      <div class="section__head reveal">
+        <span class="section__idx">04</span>
+        <h2 class="section__title">Formación</h2>
+        <p class="section__subtitle">Mi recorrido académico y la formación que estoy haciendo ahora</p>
+      </div>
+      <ol class="timeline">
+        {% for e in education %}
+        <li class="timeline__item{% if e.current %} timeline__item--current{% endif %} reveal">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <div class="timeline__card">
+            <div class="timeline__top">
+              <span class="timeline__period">{{ e.period }}</span>
+              {% if e.current %}<span class="pill">En curso</span>{% endif %}
+            </div>
+            <h3>{{ e.title }}</h3>
+            <p class="timeline__center">{{ e.center }}</p>
+            <p class="timeline__desc">{{ e.description }}</p>
+            <ul class="tag-list">
+              {% for t in e.tags %}<li class="tag tag--sm">{{ t }}</li>{% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+
     <section id="contacto" class="section section--contact">
       <div class="contact-card reveal">
-        <span class="section__idx">03</span>
+        <span class="section__idx">05</span>
         <h2 class="section__title">¿Hablamos?</h2>
         <p class="contact__text">Si tienes un proyecto, una oportunidad o simplemente quieres charlar de datos e IA, escríbeme.</p>
         <div class="contact__links">
@@ -152,6 +276,18 @@
           <a class="btn btn--ghost" href="{{ profile.github }}" target="_blank" rel="noopener noreferrer">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.03 3.29 9.3 7.86 10.81.57.1.78-.25.78-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.53-1.33-1.29-1.69-1.29-1.69-1.06-.72.08-.7.08-.7 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.6.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.16v3.2c0 .31.21.66.79.55A10.53 10.53 0 0 0 23.5 12c0-6.28-5.23-11.5-11.5-11.5Z"/></svg>
             GitHub
+          </a>
+          {% endif %}
+          {% if profile.linkedin %}
+          <a class="btn btn--ghost" href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+            LinkedIn
+          </a>
+          {% endif %}
+          {% if profile.cv %}
+          <a class="btn btn--ghost" href="{{ url_for('static', filename=profile.cv) }}" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Descargar CV
           </a>
           {% endif %}
         </div>
@@ -178,8 +314,21 @@
       navToggle.classList.toggle("is-open", open);
       navToggle.setAttribute("aria-expanded", open);
     });
+    const navDrop = document.getElementById("navDrop");
+    const navDropBtn = document.getElementById("navDropBtn");
+    const setDrop = (open) => {
+      navDrop.classList.toggle("is-open", open);
+      navDropBtn.setAttribute("aria-expanded", open);
+    };
+    navDropBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setDrop(!navDrop.classList.contains("is-open"));
+    });
+    document.addEventListener("click", (e) => { if (!navDrop.contains(e.target)) setDrop(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setDrop(false); });
     navLinks.querySelectorAll("a").forEach((link) =>
       link.addEventListener("click", () => {
+        setDrop(false);
         navLinks.classList.remove("is-open");
         navToggle.classList.remove("is-open");
         navToggle.setAttribute("aria-expanded", "false");
@@ -207,12 +356,15 @@
 
     // Resaltar el link de nav activo según la sección visible
     const sections = document.querySelectorAll("main section[id]");
-    const navAnchors = document.querySelectorAll(".nav__links a");
+    const navAnchors = document.querySelectorAll(".nav__links > a, .nav__dropbtn");
     if ("IntersectionObserver" in window && sections.length) {
       const navIo = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            const link = document.querySelector(`.nav__links a[href="#${entry.target.id}"]`);
+            const id = entry.target.id;
+            const link = (id === "proyectos" || id === "sap")
+              ? navDropBtn
+              : document.querySelector(`.nav__links > a[href="#${id}"]`);
             if (!link) return;
             if (entry.isIntersecting) {
               navAnchors.forEach((a) => a.classList.remove("is-active"));
@@ -224,6 +376,61 @@
       );
       sections.forEach((s) => navIo.observe(s));
     }
+
+    // Carruseles de imágenes de proyectos (con visor ampliado)
+    const lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.innerHTML = '<button type="button" class="lightbox__close" aria-label="Cerrar">&times;</button>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Anterior">&#8249;</button>' +
+      '<figure class="lightbox__fig"><img alt="" /><figcaption></figcaption></figure>' +
+      '<button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Siguiente">&#8250;</button>';
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector("img");
+    const lbCap = lb.querySelector("figcaption");
+    let lbSlides = [], lbIdx = 0;
+    const lbShow = (i) => {
+      lbIdx = (i + lbSlides.length) % lbSlides.length;
+      const sl = lbSlides[lbIdx], im = sl.querySelector("img");
+      lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = sl.dataset.caption || "";
+      lb.classList.toggle("is-single", lbSlides.length < 2);
+    };
+    const lbClose = () => { lb.classList.remove("is-open"); document.body.style.overflow = ""; };
+    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".lightbox__close")) lbClose(); });
+    lb.querySelector(".lightbox__nav--prev").addEventListener("click", () => lbShow(lbIdx - 1));
+    lb.querySelector(".lightbox__nav--next").addEventListener("click", () => lbShow(lbIdx + 1));
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("is-open")) return;
+      if (e.key === "Escape") lbClose();
+      if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
+      if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+    });
+
+    document.querySelectorAll("[data-carousel]").forEach((c) => {
+      const track = c.querySelector(".carousel__track");
+      const slides = [...c.querySelectorAll(".carousel__slide")];
+      const dots = c.querySelectorAll(".carousel__dot");
+      const cap = c.querySelector(".carousel__caption");
+      const current = () => Math.round(track.scrollLeft / track.clientWidth);
+      const go = (i) => track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+      const update = () => {
+        const i = current();
+        dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+        cap.textContent = (slides[i] && slides[i].dataset.caption) || "";
+      };
+      track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+      update();
+      slides.forEach((sl, k) => sl.addEventListener("click", () => {
+        lbSlides = slides; lbShow(k); lb.classList.add("is-open"); document.body.style.overflow = "hidden";
+      }));
+      if (!dots.length) return;
+      c.querySelector(".carousel__btn--prev").addEventListener("click", () => go((current() - 1 + slides.length) % slides.length));
+      c.querySelector(".carousel__btn--next").addEventListener("click", () => go((current() + 1) % slides.length));
+      dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+      track.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); go(Math.min(current() + 1, slides.length - 1)); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); go(Math.max(current() - 1, 0)); }
+      });
+    });
 
     // Botón "volver arriba"
     const backToTop = document.getElementById("backToTop");
