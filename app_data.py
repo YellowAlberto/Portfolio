@@ -7,7 +7,7 @@ no hace falta tocar el HTML.
 
 PROFILE = {
     "name": "Alberto Piedra Venegas",
-    "role": "Desarrollador Big Data, IA & Desarrollo Web",
+    "role": "Software Developer · Web, Datos y SAP",
     "tagline": (
         "Me apasiona crear software y aprender nuevas tecnologías. Desarrollo aplicaciones web, "
         "soluciones de datos e inteligencia artificial, siempre con ganas de seguir creciendo."
@@ -31,7 +31,7 @@ STACK = [
     {
         "category": "Lenguajes",
         "icon": "💻",
-        "skills": ["Python", "JavaScript", "PHP", "R", "SQL"],
+        "skills": ["Python", "JavaScript", "PHP", "R", "SQL", "ABAP (POO)", "CDS"],
     },
     {
         "category": "Big Data",
@@ -44,9 +44,9 @@ STACK = [
         "skills": ["MongoDB", "Cassandra", "Redis", "Neo4j", "SQL Server / SSIS", "MySQL", "PostgreSQL", "SQLite"],
     },
     {
-        "category": "Cloud (AWS)",
+        "category": "Cloud",
         "icon": "☁️",
-        "skills": ["S3", "Glue", "Athena", "IAM"],
+        "skills": ["AWS S3", "AWS Glue", "AWS Athena", "AWS IAM", "SAP BTP"],
     },
     {
         "category": "ETL / BI",
@@ -54,9 +54,9 @@ STACK = [
         "skills": ["Pentaho (Kettle/PDI)", "Power BI", "Tableau", "Excel avanzado"],
     },
     {
-        "category": "DevOps",
+        "category": "DevOps / Herramientas",
         "icon": "⚙️",
-        "skills": ["Docker", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus"],
+        "skills": ["Docker", "Git / GitHub", "GitHub Actions (CI/CD)", "Prometheus", "Eclipse ADT", "SAP Business Application Studio"],
     },
     {
         "category": "Machine Learning",
@@ -81,17 +81,12 @@ STACK = [
     {
         "category": "Backend / APIs",
         "icon": "🔌",
-        "skills": ["FastAPI", "Flask", "Spring Boot", "JWT", "SQLAlchemy", "JPA / Hibernate", "JUnit", "Gradio", "OpenAPI / Swagger"],
-    },
-    {
-        "category": "SAP (en formación)",
-        "icon": "🔷",
-        "skills": ["ABAP (POO)", "Eclipse ADT", "SAP BTP", "SAP Business Application Studio", "CAP (Node.js)", "CDS", "OData V4", "Fiori Elements"],
+        "skills": ["FastAPI", "Flask", "Spring Boot", "JWT", "SQLAlchemy", "JPA / Hibernate", "JUnit", "ABAP Unit", "Gradio", "OpenAPI / Swagger", "SAP CAP (Node.js)", "OData V4"],
     },
     {
         "category": "Desarrollo Web",
         "icon": "🌐",
-        "skills": ["HTML5", "CSS3", "Diseño responsive"],
+        "skills": ["HTML5", "CSS3", "Diseño responsive", "SAP Fiori Elements"],
     },
 ]
 

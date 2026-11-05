@@ -84,6 +84,8 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
 @media (prefers-reduced-motion: reduce) {
   .bg-fx__glow { animation: none; }
   html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .carousel__track { scroll-behavior: auto; }
 }
 
 /* -------------------- Reveal on scroll -------------------- */
@@ -862,3 +864,15 @@ h1, h2, h3, h4 { letter-spacing: -0.02em; }
   color: var(--accent);
   background: rgba(94, 234, 212, 0.08);
 }
+
+
+/* -------------------- Accesibilidad: áreas táctiles y foco -------------------- */
+.nav__toggle { width: 44px; height: 44px; }
+.carousel__btn { width: 44px; height: 44px; }
+.carousel__dots { gap: 0; }
+.carousel__dot { position: relative; width: 24px; height: 24px; background: none !important; transform: none !important; }
+.carousel__dot::before { content: ""; position: absolute; inset: 8.5px; border-radius: 50%; background: rgba(255,255,255,.28); transition: background .2s ease, transform .2s ease; }
+.carousel__dot.is-active::before { background: var(--grad-start); transform: scale(1.35); }
+.carousel__bar { min-height: 44px; padding: 4px 14px; }
+@media (max-width: 720px) { .doc-link, .card-link { min-height: 44px; } }
+:focus-visible { outline: 2px solid var(--grad-start); outline-offset: 3px; border-radius: 6px; }

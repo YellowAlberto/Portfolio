@@ -23,16 +23,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=15) }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=16) }}" />
 </head>
 <body>
 {% macro carousel(images, title) %}
 {% if images %}
 <div class="carousel" data-carousel role="group" aria-roledescription="carrusel" aria-label="Capturas de {{ title }}">
-  <div class="carousel__track" tabindex="0">
+  <div class="carousel__track" tabindex="0" aria-label="Capturas de {{ title }}. Usa las flechas para moverte y Enter para ampliar">
     {% for img in images %}
     {% set src = img.src if img is mapping else img %}
-    {% set alt = img.alt if (img is mapping and img.alt) else (title ~ " — captura " ~ loop.index) %}
+    {% set cap = img.caption if (img is mapping and img.caption) else "" %}
+    {% set alt = img.alt if (img is mapping and img.alt) else ((title ~ ": " ~ cap) if cap else (title ~ " — captura " ~ loop.index)) %}
     <figure class="carousel__slide" data-caption="{{ img.caption if (img is mapping and img.caption) else '' }}">
       <img src="{{ url_for('static', filename=src) }}" alt="{{ alt }}" loading="lazy" />
     </figure>
@@ -76,7 +77,7 @@
       <nav class="nav__links" id="navLinks">
         <a href="#stack">Stack</a>
         <div class="nav__dropdown" id="navDrop">
-          <button type="button" class="nav__dropbtn" id="navDropBtn" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="nav__dropbtn" id="navDropBtn" aria-expanded="false">
             Proyectos
             <svg class="nav__caret" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -93,16 +94,13 @@
 
   <main id="top">
     <section class="hero">
-      <p class="hero__badge reveal">
-        <span class="hero__badge-dot"></span> Disponible para nuevos proyectos
-      </p>
       <p class="hero__eyebrow reveal">{{ profile.role }}</p>
       <h1 class="hero__title reveal">
         Hola, soy <span class="gradient-text">{{ profile.name.split(" ")[0] }} {{ profile.name.split(" ")[1] }}</span>
       </h1>
       <p class="hero__tagline reveal">{{ profile.tagline }}</p>
       <a class="hero__sap reveal" href="#sap">
-        <span class="hero__sap-icon">🔷</span>
+        <span class="hero__sap-icon" aria-hidden="true">🔷</span>
         Estudiando SAP · En proceso de obtener certificaciones oficiales
       </a>
       <div class="hero__actions reveal">
@@ -125,7 +123,7 @@
         {% for group in stack %}
         <div class="stack-card reveal" style="--delay: {{ loop.index0 * 40 }}ms">
           <div class="stack-card__head">
-            <span class="stack-card__icon">{{ group.icon }}</span>
+            <span class="stack-card__icon" aria-hidden="true">{{ group.icon }}</span>
             <h3>{{ group.category }}</h3>
           </div>
           <ul class="tag-list">
@@ -150,7 +148,7 @@
           <div class="featured-card__glow" aria-hidden="true"></div>
           <div class="featured-card__body">
             {{ carousel(p.images, p.title) }}
-            {% if not p.images %}<div class="featured-card__icon">{{ p.icon }}</div>{% endif %}
+            {% if not p.images %}<div class="featured-card__icon" aria-hidden="true">{{ p.icon }}</div>{% endif %}
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
             <ul class="tag-list">
@@ -172,7 +170,7 @@
         {% for p in other_projects %}
         <article class="project-card reveal" style="--delay: {{ loop.index0 * 50 }}ms">
           {{ carousel(p.images, p.title) }}
-          {% if not p.images %}<div class="project-card__icon">{{ p.icon }}</div>{% endif %}
+          {% if not p.images %}<div class="project-card__icon" aria-hidden="true">{{ p.icon }}</div>{% endif %}
           <h4>{{ p.title }}</h4>
           <p>{{ p.description }}</p>
           <ul class="tag-list">
@@ -211,7 +209,7 @@
           <div class="featured-card__glow" aria-hidden="true"></div>
           <div class="featured-card__body">
             <div class="featured-card__top">
-              <div class="featured-card__icon">{{ p.icon }}</div>
+              <div class="featured-card__icon" aria-hidden="true">{{ p.icon }}</div>
               {% if p.status %}<span class="pill">{{ p.status }}</span>{% endif %}
             </div>
             <h3>{{ p.title }}</h3>
@@ -380,6 +378,7 @@
     // Carruseles de imágenes de proyectos (con visor ampliado)
     const lb = document.createElement("div");
     lb.className = "lightbox";
+    lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Visor de imágenes");
     lb.innerHTML = '<button type="button" class="lightbox__close" aria-label="Cerrar">&times;</button>' +
       '<button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Anterior">&#8249;</button>' +
       '<figure class="lightbox__fig"><img alt="" /><figcaption></figcaption></figure>' +
@@ -394,7 +393,16 @@
       lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lbCap.textContent = sl.dataset.caption || "";
       lb.classList.toggle("is-single", lbSlides.length < 2);
     };
-    const lbClose = () => { lb.classList.remove("is-open"); document.body.style.overflow = ""; };
+    let lbOpener = null;
+    const lbOpen = (slides, k, opener) => {
+      lbSlides = slides; lbShow(k); lbOpener = opener || document.activeElement;
+      lb.classList.add("is-open"); document.body.style.overflow = "hidden";
+      lb.querySelector(".lightbox__close").focus();
+    };
+    const lbClose = () => {
+      lb.classList.remove("is-open"); document.body.style.overflow = "";
+      if (lbOpener && lbOpener.focus) lbOpener.focus();
+    };
     lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".lightbox__close")) lbClose(); });
     lb.querySelector(".lightbox__nav--prev").addEventListener("click", () => lbShow(lbIdx - 1));
     lb.querySelector(".lightbox__nav--next").addEventListener("click", () => lbShow(lbIdx + 1));
@@ -403,6 +411,13 @@
       if (e.key === "Escape") lbClose();
       if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
       if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+      if (e.key === "Tab") {
+        const f = [...lb.querySelectorAll("button")].filter((b) => b.offsetParent !== null);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
 
     document.querySelectorAll("[data-carousel]").forEach((c) => {
@@ -419,9 +434,10 @@
       };
       track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
       update();
-      slides.forEach((sl, k) => sl.addEventListener("click", () => {
-        lbSlides = slides; lbShow(k); lb.classList.add("is-open"); document.body.style.overflow = "hidden";
-      }));
+      slides.forEach((sl, k) => sl.addEventListener("click", () => lbOpen(slides, k, track)));
+      track.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lbOpen(slides, Math.max(0, Math.min(current(), slides.length - 1)), track); }
+      });
       if (!dots.length) return;
       c.querySelector(".carousel__btn--prev").addEventListener("click", () => go((current() - 1 + slides.length) % slides.length));
       c.querySelector(".carousel__btn--next").addEventListener("click", () => go((current() + 1) % slides.length));
